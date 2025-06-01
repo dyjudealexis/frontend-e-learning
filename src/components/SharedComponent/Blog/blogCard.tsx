@@ -10,7 +10,7 @@ const BlogCard = ({ blog }: { blog: Blog }) => {
     return (
         <>
             <Link href={`/blog/${slug}`} className="group mb-10 flex items-center gap-9">
-                <div className="overflow-hidden rounded-lg">
+                <div className="overflow-hidden rounded-3xl">
                     <Image 
                         src= {`${getImagePrefix()}${coverImage}`}
                         alt="image"

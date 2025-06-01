@@ -14,7 +14,7 @@ const Courses = () => {
     const settings = {
         dots: false,
         infinite: true,
-        slidesToShow: 3,
+        slidesToShow: 4,
         slidesToScroll: 2,
         arrows: false,
         autoplay: true,
@@ -59,19 +59,19 @@ const Courses = () => {
     return (
         <section id="courses">
             <div className='container mx-auto lg:max-w-screen-xl md:max-w-screen-md px-4'>
-                <div className="sm:flex justify-between items-center mb-20">
+                <div className="sm:flex justify-between items-center my-10">
                     <h2 className="text-midnight_text text-4xl lg:text-5xl font-semibold mb-5 sm:mb-0">Popular courses.</h2>
                     <Link href={'/'} className="text-primary text-lg font-medium hover:tracking-widest duration-500">Explore courses&nbsp;&gt;&nbsp;</Link>
                 </div>
                 <Slider {...settings}>
                     {courseData.map((items, i) => (
                         <div key={i}>
-                            <div className='bg-white m-3 mb-12 px-3 pt-3 pb-12 shadow-course-shadow rounded-2xl h-full'>
+                            <div className='bg-white m-3 mb-12 px-0 pt-3 pb-12 shadow-course-shadow rounded-2xl h-full'>
                                 <div className="relative rounded-3xl">
                                     <Image src={`${getImagePrefix()}${items.imgSrc}`} alt="course-image" width={389} height={262} className="m-auto clipPath" />
-                                    <div className="absolute right-5 -bottom-2 bg-secondary rounded-full p-6">
+                                    {/* <div className="absolute right-5 -bottom-2 bg-primary rounded-full p-6">
                                         <h3 className="text-white uppercase text-center text-sm font-medium">best <br /> seller</h3>
-                                    </div>
+                                    </div> */}
                                 </div>
 
                                 <div className="px-3 pt-6">
@@ -92,15 +92,15 @@ const Courses = () => {
                                                 icon="solar:notebook-minimalistic-outline"
                                                 className="text-primary text-xl inline-block me-2"
                                             />
-                                            <h3 className="text-base font-medium text-black opacity-75">{items.classes} classes</h3>
+                                            <h3 className="text-primary font-medium text-black opacity-75">Watch Course</h3>
                                         </div>
-                                        <div className="flex gap-4">
+                                        {/* <div className="flex gap-4">
                                             <Icon
                                                 icon="solar:users-group-rounded-linear"
                                                 className="text-primary text-xl inline-block me-2"
                                             />
                                             <h3 className="text-base font-medium text-black opacity-75">{items.students} students</h3>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                             </div>

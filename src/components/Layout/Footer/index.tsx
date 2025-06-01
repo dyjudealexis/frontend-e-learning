@@ -56,7 +56,7 @@ const footer = () => {
               </li>
               <li className="mb-2 text-black/50 hover:text-primary w-fit">
                 <Link href="#">
-                  career
+                  Career
                 </Link>
               </li>
               <li className="mb-2 text-black/50 hover:text-primary w-fit">
@@ -77,21 +77,21 @@ const footer = () => {
                 icon="tabler:brand-google-maps"
                 className="text-primary text-3xl inline-block me-2"
               />
-              <h5 className="text-lg text-black/60">925 Filbert Street Pennsylvania 18072</h5>
+              <h5 className="text-lg text-black/60">Taguig City, Philippines</h5>
             </div>
             <div className="flex gap-2 mt-10">
               <Icon
                 icon="tabler:phone"
                 className="text-primary text-3xl inline-block me-2"
               />
-              <h5 className="text-lg text-black/60">+45 3411-4411</h5>
+              <h5 className="text-lg text-black/60">+63 9204 042 919</h5>
             </div>
             <div className="flex gap-2 mt-10">
               <Icon
                 icon="tabler:folder"
                 className="text-primary text-3xl inline-block me-2"
               />
-              <h5 className="text-lg text-black/60">info@gmail.com</h5>
+              <h5 className="text-lg text-black/60">dyjudealexis@gmail.com</h5>
             </div>
           </div>
         </div>

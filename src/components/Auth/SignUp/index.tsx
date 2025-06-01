@@ -58,7 +58,7 @@ const SignUp = () => {
             placeholder="Name"
             name="name"
             required
-            className="w-full rounded-md border border-black/20 border-solid bg-transparent px-5 py-3 text-base text-dark outline-none transition placeholder:text-grey focus:border-primary focus-visible:shadow-none text-white dark:focus:border-primary"
+            className="w-full rounded-3xl border border-black/20 border-solid bg-transparent px-5 py-3 text-base text-dark outline-none transition placeholder:text-grey focus:border-primary focus-visible:shadow-none text-black dark:focus:border-primary"
           />
         </div>
         <div className="mb-[22px]">
@@ -67,7 +67,7 @@ const SignUp = () => {
             placeholder="Email"
             name="email"
             required
-            className="w-full rounded-md border border-black/20 border-solid bg-transparent px-5 py-3 text-base text-dark outline-none transition placeholder:text-grey focus:border-primary focus-visible:shadow-none text-white dark:focus:border-primary"
+            className="w-full rounded-3xl border border-black/20 border-solid bg-transparent px-5 py-3 text-base text-dark outline-none transition placeholder:text-grey focus:border-primary focus-visible:shadow-none text-black dark:focus:border-primary"
           />
         </div>
         <div className="mb-[22px]">
@@ -76,20 +76,20 @@ const SignUp = () => {
             placeholder="Password"
             name="password"
             required
-            className="w-full rounded-md border border-black/20 border-solid bg-transparent px-5 py-3 text-base text-dark outline-none transition placeholder:text-grey focus:border-primary focus-visible:shadow-none text-white dark:focus:border-primary"
+            className="w-full rounded-3xl border border-black/20 border-solid bg-transparent px-5 py-3 text-base text-dark outline-none transition placeholder:text-grey focus:border-primary focus-visible:shadow-none text-black dark:focus:border-primary"
           />
         </div>
         <div className="mb-9">
           <button
             type="submit"
-            className="flex w-full items-center text-18 font-medium justify-center rounded-md bg-primary px-5 py-3 text-darkmode transition duration-300 ease-in-out hover:bg-transparent hover:text-primary border-primary border "
+            className="flex w-full items-center text-18 font-medium justify-center rounded-3xl bg-primary px-5 py-3 text-white hover:bg-transparent hover:text-primary border-primary border "
           >
             Sign Up {loading && <Loader />}
           </button>
         </div>
       </form>
 
-      <p className="text-body-secondary mb-4 text-white text-base">
+      <p className="text-body-secondary mb-4 text-black">
         By creating an account you are agree with our{" "}
         <a href="/#" className="text-primary hover:underline">
           Privacy
@@ -100,7 +100,7 @@ const SignUp = () => {
         </a>
       </p>
 
-      <p className="text-body-secondary text-white text-base">
+      <p className="text-body-secondary text-black">
         Already have an account?
         <Link href="/" className="pl-2 text-primary hover:underline">
           Sign In

@@ -16,7 +16,7 @@ const config: Config = {
         'testimonial-shadow2': '5.54348px 38.8043px 110.87px rgba(89,104,118,.15)',
       },
       colors: {
-        primary: "#6556ff",
+        primary: "#0056d2",
         secondary: "#1a21bc",
         grey: "#57595f",
         slateGray: "#f6faff",

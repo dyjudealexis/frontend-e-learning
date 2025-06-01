@@ -33,10 +33,11 @@ const HeaderLink: React.FC<{ item: HeaderItem }> = ({ item }) => {
     >
       <Link
         href={`/${item.href}`}
-        className={`text-lg flex hover:text-black capitalized relative ${isActive
-            ? "text-black after:absolute after:w-8 after:h-1 after:bg-primary after:rounded-full after:-bottom-1"
-            : "text-grey"
-          }`}
+        // className={`text-lg flex hover:text-black capitalized relative ${isActive
+        //     ? "text-black after:absolute after:w-8 after:h-1 after:bg-primary after:rounded-full after:-bottom-1"
+        //     : "text-grey"
+        //   }`}
+        className={`text-lg flex hover:text-black capitalized relative text-grey`}
       >
         {item.label}
         {item.submenu && (
@@ -60,7 +61,7 @@ const HeaderLink: React.FC<{ item: HeaderItem }> = ({ item }) => {
 
       {submenuOpen && (
         <div
-          className={`absolute py-2 left-0 mt-0.5 w-60 bg-white dark:bg-darklight dark:text-white shadow-lg rounded-lg `}
+          className={`absolute py-2 left-0 mt-0.5 w-60 bg-white dark:bg-darklight dark:text-white shadow-lg rounded-3xl `}
           data-aos="fade-up"
           data-aos-duration="500"
         >

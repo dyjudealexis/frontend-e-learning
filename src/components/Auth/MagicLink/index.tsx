@@ -50,13 +50,13 @@ const MagicLink = () => {
           required
           value={email}
           onChange={(e) => setEmail(e.target.value.toLowerCase())}
-          className="w-full rounded-md border border-stroke bg-transparent px-5 py-3 text-base text-dark outline-none transition placeholder:text-dark-6 focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:text-white dark:focus:border-primary"
+          className="w-full rounded-3xl border border-stroke bg-transparent px-5 py-3 text-base text-dark outline-none transition placeholder:text-dark-6 focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:text-white dark:focus:border-primary"
         />
       </div>
       <div className="mb-9">
         <button
           type="submit"
-          className="flex w-full cursor-pointer items-center justify-center rounded-md border border-primary bg-[#102C46] px-5 py-3 text-base text-white transition duration-300 ease-in-out hover:bg-[#102C46]"
+          className="flex w-full cursor-pointer items-center justify-center rounded-3xl border border-primary bg-[#102C46] px-5 py-3 text-base text-white transition duration-300 ease-in-out hover:bg-[#102C46]"
         >
           Send Magic Link 
         </button>

@@ -96,7 +96,7 @@ const Header: React.FC = () => {
               <div className="fixed top-0 left-0 w-full h-full bg-black/50 flex items-center justify-center z-50">
                 <div
                   ref={signInRef}
-                  className="relative mx-auto w-full max-w-md overflow-hidden rounded-lg px-8 pt-14 pb-8 text-center bg-white"
+                  className="relative mx-auto w-full max-w-md overflow-hidden rounded-3xl px-8 pt-14 pb-8 text-center bg-white"
                 >
                   <button
                     onClick={() => setIsSignInOpen(false)}
@@ -125,7 +125,7 @@ const Header: React.FC = () => {
               <div className="fixed top-0 left-0 w-full h-full bg-black/50 flex items-center justify-center z-50">
                 <div
                   ref={signUpRef}
-                  className="relative mx-auto w-full max-w-md overflow-hidden rounded-lg bg-white backdrop-blur-md px-8 pt-14 pb-8 text-center"
+                  className="relative mx-auto w-full max-w-md overflow-hidden rounded-3xl bg-white backdrop-blur-md px-8 pt-14 pb-8 text-center"
                 >
                   <button
                     onClick={() => setIsSignUpOpen(false)}
@@ -143,7 +143,7 @@ const Header: React.FC = () => {
             )}
             <button
               onClick={() => setNavbarOpen(!navbarOpen)}
-              className="block lg:hidden p-2 rounded-lg"
+              className="block lg:hidden p-2 rounded-3xl"
               aria-label="Toggle mobile menu"
             >
               <span className="block w-6 h-0.5 bg-black"></span>
@@ -179,7 +179,7 @@ const Header: React.FC = () => {
             <div className="mt-4 flex flex-col space-y-4 w-full">
               <Link
                 href="#"
-                className="bg-transparent border border-primary text-primary px-4 py-2 rounded-lg hover:bg-blue-600 hover:text-white"
+                className="bg-transparent border border-primary text-primary px-4 py-2 rounded-3xl hover:bg-blue-600 hover:text-white"
                 onClick={() => {
                   setIsSignInOpen(true);
                   setNavbarOpen(false);
@@ -189,7 +189,7 @@ const Header: React.FC = () => {
               </Link>
               <Link
                 href="#"
-                className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+                className="bg-primary text-white px-4 py-2 rounded-3xl hover:bg-blue-700"
                 onClick={() => {
                   setIsSignUpOpen(true);
                   setNavbarOpen(false);
