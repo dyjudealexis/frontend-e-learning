@@ -1,20 +1,26 @@
-'use client';
+import { FC } from 'react';
+import CourseWatchComponent from "@/components/Courses/Watch";
+import ListOfCourses from "@/components/Courses";
 
-import ListOfCourses from '@/components/Courses';
-import CourseWatchComponent from '@/components/Courses/Watch';
-import { useSearchParams } from 'next/navigation';
-import React from 'react';
+interface CourseWatchPageProps {
+  searchParams: { [key: string]: string | undefined };
+}
 
-const CourseWatch = () => {
-  const searchParams = useSearchParams();
-  const courseId = searchParams.get('id');
+const CourseWatchPage: FC<CourseWatchPageProps> = ({ searchParams }) => {
+  const courseId = searchParams.id;
 
   if (!courseId) return <div>Loading...</div>;
 
-  return <>
-  <CourseWatchComponent courseId={courseId} />
-  <ListOfCourses fallbackHeading="You may also like" className="mt-0" limit={"8"} />
-  </>;
+  return (
+    <>
+      <CourseWatchComponent courseId={courseId} />
+      <ListOfCourses
+        fallbackHeading="You may also like"
+        className="mt-0"
+        limit="8"
+      />
+    </>
+  );
 };
 
-export default CourseWatch;
+export default CourseWatchPage;

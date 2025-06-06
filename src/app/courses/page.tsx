@@ -1,12 +1,14 @@
-import ListOfCourses from '@/components/Courses'
-import React from 'react'
+import ListOfCourses from "@/components/Courses";
+import React, { Suspense } from "react";
 
 const Courses = () => {
   return (
     <>
-      <ListOfCourses showSearchHeading={true} className='mt-20' />
+      <Suspense fallback={<></>}>
+        <ListOfCourses showSearchHeading={true} className="mt-20" />
+      </Suspense>
     </>
-  )
-}
+  );
+};
 
-export default Courses
+export default Courses;
