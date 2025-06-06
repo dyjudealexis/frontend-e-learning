@@ -5,6 +5,7 @@ import Footer from "@/components/Layout/Footer";
 import { ThemeProvider } from "next-themes";
 import ScrollToTop from "@/components/ScrollToTop";
 const font = Poppins({ subsets: ["latin"], weight: ["400", "500", "600", "700"], });
+import { Toaster } from 'react-hot-toast'
 
 export default function RootLayout({
   children,
@@ -23,6 +24,7 @@ export default function RootLayout({
           {children}
           <Footer />
           <ScrollToTop />
+          <Toaster position="bottom-right" />
         </ThemeProvider>
       </body>
     </html>

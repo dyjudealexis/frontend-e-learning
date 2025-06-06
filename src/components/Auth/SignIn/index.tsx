@@ -1,106 +1,166 @@
 "use client";
-import { signIn } from "next-auth/react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import SocialSignIn from "../SocialSignIn";
-import Logo from "@/components/Layout/Header/Logo"
+import Logo from "@/components/Layout/Header/Logo";
 import Loader from "@/components/Common/Loader";
+import { Icon } from "@iconify/react";
+import useSWRMutation from "swr/mutation";
+import { setCookie } from "@/utils/cookies";
 
-const Signin = () => {
-  const router = useRouter();
+type SigninProps = {
+  onSignUpClick: () => void;
+  onClose: () => void; // 👈 New prop
+};
 
-  const [loginData, setLoginData] = useState({
-    email: "",
-    password: "",
-    checkboxToggle: false,
+const loginUser = async (
+  url: string,
+  { arg }: { arg: Record<string, string> }
+) => {
+  const res = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(arg),
   });
+
+  if (!res.ok) {
+    const errorData = await res.json();
+    throw new Error(errorData.message || "Failed to login");
+  }
+
+  return res.json();
+};
+
+const Signin: React.FC<SigninProps> = ({ onSignUpClick, onClose }) => {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [loginData, setLoginData] = useState({
+    email: "demoaccount@example.com",
+    password: "demoaccount123",
+  });
 
-  const loginUser = (e: any) => {
+  const { trigger } = useSWRMutation(
+    `${process.env.NEXT_PUBLIC_API_URL}/auth/login`,
+    loginUser
+  );
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev);
+  };
+
+  const loginUserHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     setLoading(true);
-    signIn("credentials", { ...loginData, redirect: false })
-      .then((callback) => {
-        if (callback?.error) {
-          toast.error(callback?.error);
-          console.log(callback?.error);
-          setLoading(false);
-          return;
-        }
 
-        if (callback?.ok && !callback?.error) {
-          toast.success("Login successful");
-          setLoading(false);
-          router.push("/");
-        }
-      })
-      .catch((err) => {
-        setLoading(false);
-        console.log(err.message);
-        toast.error(err.message);
+    try {
+      const data = await trigger(loginData);
+      const { token, user } = data;
+
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/cookies/set`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include", // 👈 Important for sending cookies
+        body: JSON.stringify({
+          cookieName: `${process.env.NEXT_PUBLIC_SESSION_TOKEN_COOKIE}`,
+          cookieValue: token,
+        }),
       });
+
+      setCookie(`${process.env.NEXT_PUBLIC_USER_COOKIE}`, user);
+      setCookie(`${process.env.NEXT_PUBLIC_IS_AUTHENTICATED_COOKIE}`, "true");
+
+      // await fetch(`${process.env.NEXT_PUBLIC_API_URL}/cookies/set`, {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   credentials: 'include',
+      //   body: JSON.stringify({ cookieName: 'user', cookieValue: user }),
+      // });
+
+      toast.success("Login successful!");
+      onClose();
+      // router.push("/");
+    } catch (err: any) {
+      toast.error(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <>
-      <div className="mb-10 text-center mx-auto inline-block max-w-[160px]">
+      <div className="mb-4 text-center mx-auto inline-block max-w-[260px]">
         <Logo />
       </div>
 
-      <SocialSignIn />
-
-      <span className="z-1 relative my-8 block text-center before:content-[''] before:absolute before:h-px before:w-40% before:bg-black/15 before:left-0 before:top-3 after:content-[''] after:absolute after:h-px after:w-40% after:bg-black/15 after:top-3 after:right-0">
-        <span className="text-body-secondary relative z-10 inline-block px-3 text-base text-black">
-          OR
-        </span>
-      </span>
-
-      <form onSubmit={(e) => e.preventDefault()}>
+      <form onSubmit={loginUserHandler}>
         <div className="mb-[22px]">
           <input
             type="email"
             placeholder="Email"
+            value={loginData.email}
             onChange={(e) =>
               setLoginData({ ...loginData, email: e.target.value })
             }
-            className="w-full rounded-3xl border border-black/20 border-solid bg-transparent px-5 py-3 text-base text-dark outline-none transition placeholder:text-grey focus:border-primary focus-visible:shadow-none text-black dark:focus:border-primary"
+            required
+            className="w-full rounded-3xl border border-black/20 bg-transparent px-5 py-3 text-base text-dark outline-none placeholder:text-grey focus:border-primary text-black"
           />
         </div>
-        <div className="mb-[22px]">
+
+        <div className="mb-[22px] relative">
           <input
-            type="password"
+            type={showPassword ? "text" : "password"}
             placeholder="Password"
+            value={loginData.password}
             onChange={(e) =>
               setLoginData({ ...loginData, password: e.target.value })
             }
-            className="w-full rounded-3xl border border-black/20 border-solid bg-transparent px-5 py-3 text-base text-dark outline-none transition placeholder:text-grey focus:border-primary focus-visible:shadow-none text-black dark:focus:border-primary"
+            required
+            className="w-full rounded-3xl border border-black/20 bg-transparent px-5 py-3 text-base text-dark outline-none placeholder:text-grey focus:border-primary text-black pr-12"
           />
+          <button
+            type="button"
+            onClick={togglePasswordVisibility}
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-xl text-gray-500"
+            aria-label="Toggle password visibility"
+          >
+            <Icon icon={showPassword ? "mdi:eye-off" : "mdi:eye"} />
+          </button>
         </div>
+
         <div className="mb-9">
           <button
-            onClick={loginUser}
             type="submit"
-            className="bg-primary text-white w-full py-3 rounded-3xl text-18 font-medium border border-primary hover:text-primary hover:bg-transparent"
+            className="bg-primary text-white w-full py-3 rounded-3xl text-18 font-medium border border-primary hover:text-primary hover:bg-transparent flex items-center justify-center gap-2"
+            disabled={loading}
           >
-            Sign In {loading && <Loader />}
+            {loading ? (
+              <>
+                <Loader className="w-5 h-5" />
+                Signing In...
+              </>
+            ) : (
+              "Sign In"
+            )}
           </button>
         </div>
       </form>
 
-      {/* <Link
-        href="/forgot-password"
-        className="mb-2 inline-block text-base text-dark hover:text-primary text-white dark:hover:text-primary"
-      >
-        Forgot Password?
-      </Link> */}
-      <p className="text-body-secondary text-black text-base">
+      <p className="text-base text-black">
         Not a member yet?{" "}
-        <Link href="/" className="text-primary hover:underline">
+        <button
+          type="button"
+          className="text-primary hover:underline"
+          onClick={onSignUpClick}
+        >
           Sign Up
-        </Link>
+        </button>
       </p>
     </>
   );

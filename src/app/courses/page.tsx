@@ -1,10 +1,11 @@
+import ListOfCourses from '@/components/Courses'
 import React from 'react'
 
 const Courses = () => {
   return (
-    <div>
-      courses
-    </div>
+    <>
+      <ListOfCourses showSearchHeading={true} className='mt-20' />
+    </>
   )
 }
 
