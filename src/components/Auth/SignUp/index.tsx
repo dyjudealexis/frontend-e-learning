@@ -50,7 +50,7 @@ const SignUp: React.FC<SignUpProps> = ({ onSignInClick }) => {
     try {
       await trigger(value);
       toast.success("Registration successful!");
-      console.log("Registration successful!")
+      // console.log("Registration successful!")
       onSignInClick();
     } catch (err: any) {
       toast.error(err.message);
@@ -110,7 +110,7 @@ const SignUp: React.FC<SignUpProps> = ({ onSignInClick }) => {
             className="flex w-full items-center justify-center rounded-3xl bg-primary px-5 py-3 text-18 font-medium text-white hover:bg-transparent hover:text-primary border border-primary"
             disabled={loading}
           >
-            Sign Up {loading && <Loader />}
+            Sign Up {loading && <Loader hovered/>}
           </button>
         </div>
       </form>

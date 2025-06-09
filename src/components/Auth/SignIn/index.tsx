@@ -137,12 +137,12 @@ const Signin: React.FC<SigninProps> = ({ onSignUpClick, onClose }) => {
         <div className="mb-9">
           <button
             type="submit"
-            className="bg-primary text-white w-full py-3 rounded-3xl text-18 font-medium border border-primary hover:text-primary hover:bg-transparent flex items-center justify-center gap-2"
+            className="group bg-primary text-white w-full py-3 rounded-3xl text-18 font-medium border border-primary hover:text-primary hover:bg-transparent flex items-center justify-center gap-2"
             disabled={loading}
           >
             {loading ? (
               <>
-                <Loader className="w-5 h-5" />
+                <Loader className="w-5 h-5" hovered />
                 Signing In...
               </>
             ) : (
