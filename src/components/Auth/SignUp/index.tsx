@@ -107,7 +107,7 @@ const SignUp: React.FC<SignUpProps> = ({ onSignInClick }) => {
         <div className="mb-9">
           <button
             type="submit"
-            className="flex w-full items-center justify-center rounded-3xl bg-primary px-5 py-3 text-18 font-medium text-white hover:bg-transparent hover:text-primary border border-primary"
+            className="group bg-primary text-white w-full py-3 rounded-3xl text-18 font-medium border border-primary hover:text-primary hover:bg-transparent flex items-center justify-center gap-2"
             disabled={loading}
           >
             Sign Up {loading && <Loader hovered/>}
