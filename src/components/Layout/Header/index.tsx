@@ -251,7 +251,11 @@ export default function Header() {
           </div>
           <nav className="flex flex-col items-start p-4">
             {headerData.map((item, idx) => (
-              <MobileHeaderLink key={idx} item={item} />
+              <MobileHeaderLink
+                key={idx}
+                item={item}
+                closeMenu={() => setNavbarOpen(false)}
+              />
             ))}
 
             {showAuthButtons && (
@@ -282,7 +286,10 @@ export default function Header() {
               <div className="mt-4 flex flex-col space-y-4 w-full">
                 <p>{`Hello, ${user?.name || "User"}`}</p>
                 <button
-                  onClick={handleLogout}
+                  onClick={() => {
+                    handleLogout();
+                    setNavbarOpen(false); // close menu
+                  }}
                   className="bg-red-100 text-red-700 px-4 py-2 rounded-full hover:bg-red-200"
                 >
                   Log Out
