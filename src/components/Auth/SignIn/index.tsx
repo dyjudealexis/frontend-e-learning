@@ -7,6 +7,7 @@ import Loader from "@/components/Common/Loader";
 import { Icon } from "@iconify/react";
 import useSWRMutation from "swr/mutation";
 import { setCookie } from "@/utils/cookies";
+import api from "@/utils/axios";
 
 type SigninProps = {
   onSignUpClick: () => void;
@@ -59,16 +60,9 @@ const Signin: React.FC<SigninProps> = ({ onSignUpClick, onClose }) => {
       const data = await trigger(loginData);
       const { token, user } = data;
 
-      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/cookies/set`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include", // 👈 Important for sending cookies
-        body: JSON.stringify({
-          cookieName: `${process.env.NEXT_PUBLIC_SESSION_TOKEN_COOKIE}`,
-          cookieValue: token,
-        }),
+      await api.post("/cookies/set", {
+        cookieName: process.env.NEXT_PUBLIC_SESSION_TOKEN_COOKIE,
+        cookieValue: token,
       });
 
       setCookie(`${process.env.NEXT_PUBLIC_USER_COOKIE}`, user);

@@ -1,5 +1,6 @@
 // utils/swr.ts
 import useSWR, { SWRConfiguration, KeyedMutator } from 'swr';
+import { getCookie } from './cookies';
 
 /**
  * Generic fetcher which:
@@ -11,7 +12,7 @@ import useSWR, { SWRConfiguration, KeyedMutator } from 'swr';
 export async function fetcher(url: string) {
   // In Next.js/SSR you may need to guard window usage:
   const token = typeof window !== 'undefined'
-    ? localStorage.getItem('token')
+    ? getCookie(`${process.env.NEXT_PUBLIC_SESSION_TOKEN_COOKIE}`)
     : null;
 
   const headers: HeadersInit = {};

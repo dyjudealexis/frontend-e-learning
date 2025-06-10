@@ -7,26 +7,24 @@ import { useState } from "react";
 import Loader from "@/components/Common/Loader";
 import { Icon } from "@iconify/react";
 import useSWRMutation from "swr/mutation";
+import api from "@/utils/axios";
 
 type SignUpProps = {
   onSignInClick: () => void;
 };
 
-const registerUser = async (url: string, { arg }: { arg: Record<string, string> }) => {
-  const res = await fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(arg),
-  });
-
-  if (!res.ok) {
-    const errorData = await res.json();
-    throw new Error(errorData.message || "Failed to register");
+const registerUser = async (
+  url: string,
+  { arg }: { arg: Record<string, string> }
+) => {
+  try {
+    const response = await api.post(url, arg);
+    return response.data;
+  } catch (error: any) {
+    const message =
+      error.response?.data?.message || 'Failed to register';
+    throw new Error(message);
   }
-
-  return res.json();
 };
 
 const SignUp: React.FC<SignUpProps> = ({ onSignInClick }) => {
