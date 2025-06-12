@@ -3,7 +3,7 @@ import axios from 'axios';
 import { getCookie } from './cookies';
 
 const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL, // e.g., http://localhost:8000
+  baseURL: `${process.env.NEXT_PUBLIC_API_URL}`, // e.g., http://localhost:8000
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',

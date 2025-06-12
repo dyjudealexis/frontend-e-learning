@@ -95,6 +95,7 @@ const CourseWatchComponent = ({ courseId }: { courseId: string }) => {
             src={data.ytembedlink}
             frameBorder="0"
             className="w-full h-[500px]"
+            allowFullScreen
           ></iframe>
           <div className="mt-8">
             <h2 className="text-midnight_text text-3xl lg:text-3xl font-semibold mb-5 sm:mb-0">
